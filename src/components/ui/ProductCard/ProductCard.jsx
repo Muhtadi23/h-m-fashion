@@ -13,12 +13,18 @@ const ProductCard = ({ image, image2 }) => {
                 lg:max-w-[380px]
                 xl:max-w-[400px]
                 mx-auto
-                shadow-lg overflow-hidden
+                rounded-2xl
+                overflow-hidden
+                shadow-md
+                transition-transform
+                duration-300
+                hover:shadow-xl
+                hover:-translate-y-1
+                bg-white
             "
         >
             {/* ---------- Image Wrapper ----------- */}
-            <div className="relative w-full aspect-[3/4] overflow-hidden group cursor-pointer">
-                {/* Default Image */}
+            <div className="relative w-full aspect-[3/4] overflow-hidden group">
                 {image && (
                     <Image
                         src={image}
@@ -43,11 +49,11 @@ const ProductCard = ({ image, image2 }) => {
             </div>
 
             {/* ---------- Title & Price ----------- */}
-            <div className="px-4 py-3 md:px-6 md:py-4 text-center">
-                <h3 className="text-sm md:text-base font-medium leading-tight">
+            <div className="px-5 py-4 text-center">
+                <h3 className="text-base md:text-lg font-semibold text-gray-800">
                     Women&apos;s Co‑Ord Set&nbsp;|&nbsp;Dark&nbsp;Brown
                 </h3>
-                <p className="mt-1 text-lg md:text-xl font-semibold">
+                <p className="mt-2 text-xl font-bold text-gray-900">
                     Tk&nbsp;2,475
                 </p>
             </div>
@@ -57,11 +63,14 @@ const ProductCard = ({ image, image2 }) => {
                 type="button"
                 className="
                     w-full
-                    border border-gray-300
+                    border-t border-gray-200 cursor-pointer
                     flex items-center justify-center gap-2
-                    px-4 py-3 md:px-6 md:py-4
+                    px-6 py-4
                     text-sm md:text-base
-                    hover:bg-gray-200 transition-colors
+                    font-medium
+                    text-gray-700
+                    hover:bg-gray-200
+                    transition-colors
                 "
             >
                 <FiShoppingCart className="text-base md:text-lg" />
