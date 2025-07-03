@@ -11,7 +11,6 @@ const page = () => {
                 <ProductCard image={"/img2.jpg"} />
                 <ProductCard image={"/img3.jpg"} />
                 <ProductCard image={"/img4.jpg"} />
-                {/* <ProductCard image={"/img5.jpg"} /> */}
             </div>
         </div>
     );

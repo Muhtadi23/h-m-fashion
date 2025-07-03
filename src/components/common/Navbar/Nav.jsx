@@ -79,7 +79,7 @@ const Nav = () => {
 
                 {/* Icons */}
                 <div className="flex items-center gap-4 text-xl text-gray-700">
-                    <button><FaShoppingBag className="cursor-pointer" /></button>
+                    <Link href="/cart"><FaShoppingBag className="cursor-pointer" /></Link>
                     <FaSearch className="cursor-pointer" />
                     <Link href=""><FaUser className="hidden sm:inline cursor-pointer" /></Link>
 
