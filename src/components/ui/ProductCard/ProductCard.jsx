@@ -16,10 +16,6 @@ const ProductCard = ({ image, image2 }) => {
                 rounded-2xl
                 overflow-hidden
                 shadow-md
-                transition-transform
-                duration-300
-                hover:shadow-xl
-                hover:-translate-y-1
                 bg-white
             "
         >
@@ -31,7 +27,7 @@ const ProductCard = ({ image, image2 }) => {
                         alt="Default Image"
                         fill
                         sizes="(max-width: 768px) 100vw, 320px"
-                        className="object-cover transition-opacity duration-300 group-hover:opacity-0"
+                        className="object-cover group-hover:opacity-0"
                         priority
                     />
                 )}
@@ -42,7 +38,7 @@ const ProductCard = ({ image, image2 }) => {
                         alt="Hover Image"
                         fill
                         sizes="(max-width: 768px) 100vw, 320px"
-                        className="object-cover absolute top-0 left-0 transition-opacity duration-300 opacity-0 group-hover:opacity-100"
+                        className="object-cover absolute top-0 left-0 opacity-0 group-hover:opacity-100"
                         priority
                     />
                 )}
@@ -63,14 +59,13 @@ const ProductCard = ({ image, image2 }) => {
                 type="button"
                 className="
                     w-full
-                    border-t border-gray-200 cursor-pointer
+                    border-t border-gray-200
                     flex items-center justify-center gap-2
                     px-6 py-4
                     text-sm md:text-base
                     font-medium
                     text-gray-700
-                    hover:bg-gray-200
-                    transition-colors
+                    bg-white
                 "
             >
                 <FiShoppingCart className="text-base md:text-lg" />
