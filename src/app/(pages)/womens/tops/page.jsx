@@ -4,8 +4,8 @@ import React from 'react';
 
 const page = () => {
     return (
-        <div>
-            <CategoryBanner imageSrc={"/women_sBanner.webp"} />
+        <div className=''>
+            <CategoryBanner imageSrc={"/women_sBanner-removebg-preview.png"} bannerContent="Womans Premium Cotton Tops" />
 
             <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4'>
                 <ProductCard image={"/three1.jpg"} />
