@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import React from 'react';
 import { Star, ShoppingBag, Heart } from 'lucide-react';
+import AddToCartButton from '../AddToCartButton/AddToCartButton';
+import SaleBadge from '../SaleBadge/SaleBadge';
 
 const ProductCard = ({ image, image2 }) => {
     return (
@@ -70,16 +72,11 @@ const ProductCard = ({ image, image2 }) => {
                     </div>
 
                     {/* Add to Cart Button */}
-                    <button className="w-full bg-gradient-to-r from-gray-900 to-gray-800 hover:from-gray-800 hover:to-gray-700 text-white font-medium px-6 py-3 rounded-full transition-all duration-300 transform hover:scale-[1.02] hover:shadow-lg active:scale-[0.98] flex items-center justify-center gap-2 group/btn">
-                        <ShoppingBag className="w-4 h-4 transition-transform duration-300 group-hover/btn:scale-110" />
-                        <span>Add to Cart</span>
-                    </button>
+                    <AddToCartButton />
                 </div>
 
                 {/* Sale Badge */}
-                <div className="absolute top-4 left-4 bg-gradient-to-r from-red-500 to-red-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
-                    40% OFF
-                </div>
+                <SaleBadge />
 
                 {/* Shine Effect */}
                 <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
