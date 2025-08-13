@@ -18,12 +18,12 @@ const CategoryBanner = ({ imageSrc, bannerContent }) => {
                         </div>
 
                         {/* Heading */}
-                        <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black leading-tight text-gray-900">
+                        <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black leading-tight text-main-gray">
                             {bannerContent}
                         </h1>
 
                         {/* Description */}
-                        <p className="text-lg sm:text-xl text-gray-600 leading-relaxed max-w-2xl">
+                        <p className="text-lg sm:text-xl text-secondary-gray leading-relaxed max-w-2xl">
                             Discover our meticulously curated collection designed to elevate your style and inspire your journey.
                         </p>
 

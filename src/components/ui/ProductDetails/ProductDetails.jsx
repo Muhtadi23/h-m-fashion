@@ -3,11 +3,8 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { FiMinus, FiPlus } from 'react-icons/fi';
+import SaleBadge from '../SaleBadge/SaleBadge';
 
-/**
- * Product details page – tailor the dummy data (images & meta)
- * to come from your backend / CMS as needed.
- */
 export default function ProductDetails() {
     /* ───────────────────────── dummy data */
     const images = [
@@ -16,6 +13,7 @@ export default function ProductDetails() {
         '/productMan1-back.webp',
         '/productMan1-side.webp',
     ];
+
     const [mainImageIdx, setMainImageIdx] = useState(0);
     const [qty, setQty] = useState(1);
     const [size, setSize] = useState('XS');
@@ -46,8 +44,8 @@ export default function ProductDetails() {
                             key={src}
                             onClick={() => setMainImageIdx(idx)}
                             className={`relative w-24 h-24 border-2 ${mainImageIdx === idx
-                                    ? 'border-black'
-                                    : 'border-transparent hover:border-gray-300'
+                                ? 'border-black'
+                                : 'border-transparent hover:border-gray-300'
                                 } flex-shrink-0`}
                         >
                             <Image src={src} alt="thumb" fill className="object-cover" />
@@ -60,7 +58,7 @@ export default function ProductDetails() {
             <div className="space-y-6 lg:pl-10">
                 {/* Title & SKU */}
                 <div>
-                    <h1 className="text-3xl md:text-4xl font-bold leading-tight">
+                    <h1 className="text-main-gray text-3xl md:text-4xl font-bold leading-tight">
                         Performance Polo | Arrow Wood
                     </h1>
                     <p className="mt-2 text-sm tracking-wider text-gray-500">
@@ -72,9 +70,7 @@ export default function ProductDetails() {
                 <div className="flex items-center gap-3">
                     <p className="line-through text-gray-400 text-lg">Tk 2,200</p>
                     <p className="text-2xl font-semibold">Tk1,760 BDT</p>
-                    <span className="bg-red-600 text-white text-xs font-bold px-2 py-1 uppercase">
-                        Sale
-                    </span>
+                    <SaleBadge />
                 </div>
                 <p className="text-sm">
                     <span className="underline">Shipping</span> calculated at checkout.
@@ -89,8 +85,8 @@ export default function ProductDetails() {
                                 key={s}
                                 onClick={() => setSize(s)}
                                 className={`px-5 py-2 border rounded-full text-sm uppercase ${size === s
-                                        ? 'bg-black text-white'
-                                        : 'border-gray-300 hover:border-black'
+                                    ? 'bg-black text-white'
+                                    : 'border-gray-300 hover:border-black'
                                     }`}
                             >
                                 {s}
@@ -234,7 +230,7 @@ export default function ProductDetails() {
                     {/* Size Chart image */}
                     <div className="pt-6">
                         <Image
-                            src="/chart.webp" 
+                            src="/chart.webp"
                             alt="Size Chart"
                             width={600}
                             height={300}

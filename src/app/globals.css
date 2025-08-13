@@ -1,15 +1,29 @@
 @import "tailwindcss";
 
+/* for heading main and secondary color */
+
 :root {
   /* --background: #ffffff;
   --foreground: #171717; */
+  --main: #101829;
+  --secondary: #1e2939; 
+  --gray-600: #4a5565;
+  --white: #ffffff;
+  --black: #000000;
+  --red: #fb2c36;
+  --amber: #ffbb00;
+  --purple: #9810fa;
+  --purple-dark: 
 }
 
-@theme inline {
-  /* --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono); */
+@theme {
+  --color-main-gray: var(--main);
+  --color-secondary-gray: var(--secondary);
+  --color-white: var(--white);
+  --color-black: var(--black);
+  --color-red: var(--red);
+  --color-gray-600: var(--gray-600);
+  --color-amber: var(--amber);
 }
 
 @media (prefers-color-scheme: dark) {
