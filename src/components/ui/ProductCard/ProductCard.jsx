@@ -2,7 +2,6 @@ import Image from 'next/image';
 import React from 'react';
 import { Star, ShoppingBag, Heart } from 'lucide-react';
 import AddToCartButton from '../AddToCartButton/AddToCartButton';
-import SaleBadge from '../SaleBadge/SaleBadge';
 
 const ProductCard = ({ image, image2 }) => {
     return (
@@ -36,15 +35,6 @@ const ProductCard = ({ image, image2 }) => {
                         />
                     )}
 
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                    {/* Quick Shop Overlay */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500">
-                        <button className="bg-white/95 backdrop-blur-sm text-gray-800 px-6 py-3 rounded-full font-medium text-sm transition-all duration-300 hover:bg-white hover:scale-105 hover:shadow-xl transform translate-y-4 group-hover:translate-y-0">
-                            Quick Shop
-                        </button>
-                    </div>
                 </div>
 
                 {/* Product Info */}
@@ -76,12 +66,14 @@ const ProductCard = ({ image, image2 }) => {
                 </div>
 
                 {/* Sale Badge */}
-                <SaleBadge />
+                <div className="absolute top-4 left-4 bg-gradient-to-r from-red-500 to-red-600 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
+                    40% OFF
+                </div>
 
                 {/* Shine Effect */}
-                <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                {/* <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                </div>
+                </div> */}
             </div>
 
             {/* Enhanced Shadow */}
