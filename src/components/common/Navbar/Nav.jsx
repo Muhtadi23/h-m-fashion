@@ -1,101 +1,207 @@
-'use client';
+"use client"
 
-import { useState } from 'react';
-import Link from 'next/link';
-import { FiMenu, FiX } from 'react-icons/fi';
-import { FaSearch, FaUser, FaShoppingBag } from 'react-icons/fa';
-import DropdownItem from './DropdownItem';
+import { useState, useEffect } from "react"
+import { usePathname } from "next/navigation"
+import Link from "next/link"
+import { Search, User, ShoppingBag, Menu, X, ChevronDown, ChevronUp } from "lucide-react"
+import { navItems } from "@/lib/nav-items"
 
+// Desktop dropdown menu
+function DesktopMenu({ item, pathname }) {
+    const [isOpen, setIsOpen] = useState(false)
 
-const navItems = [
-    { title: 'Home', href: '/' },
-    { title: 'Products', href: '/products' },
-    { title: 'Shoes', href: '/shoes' },
-    {
-        title: 'Mens',
-        children: [
-            { title: 'T-Shirts', href: '/mens/t-shirts' },
-            { title: 'Shirts', href: '/mens/shirts' },
-        ],
-    },
-    {
-        title: 'Womens',
-        children: [
-            { title: 'Dresses', href: '/womens/dresses' },
-            { title: 'Tops', href: '/womens/tops' },
-        ],
-    },
-    {
-        title: 'Kids',
-        children: [
-            {
-                title: 'Boys',
-                children: [
-                    { title: 'T-Shirts', href: '/kids/boys/t-shirts' },
-                    { title: 'Shirts', href: '/kids/boys/shirts' },
-                ],
-            },
-            {
-                title: 'Girls',
-                children: [
-                    { title: 'Dresses', href: '/kids/girls/dresses' },
-                    { title: 'Tops', href: '/kids/girls/tops' },
-                ],
-            },
-        ],
-    },
-
-];
-
-const Nav = () => {
-
-    const [menuOpen, setMenuOpen] = useState(false);
+    if (!item.children) {
+        return (
+            <Link
+                href={item.href || "#"}
+                className={`px-4 py-2 text-sm font-medium hover:text-primary ${pathname === item.href ? "text-primary" : "text-gray-800"}`}
+            >
+                {item.title}
+            </Link>
+        )
+    }
 
     return (
-        <div className="w-full relative z-50">
-            <div className="px-2 py-2 lg:px-10 flex items-center justify-between relative">
+        <div
+            className="relative"
+            onMouseEnter={() => setIsOpen(true)}
+            onMouseLeave={() => setIsOpen(false)}
+        >
+            <button
+                className={`flex items-center gap-1 px-4 py-2 text-sm font-medium hover:text-primary ${pathname.startsWith(item.href || "") ? "text-primary" : "text-gray-800"}`}
+            >
+                {item.title}
+                <ChevronDown className="h-4 w-4" />
+            </button>
 
-                {/* Mobile Menu Button */}
-                <button
-                    onClick={() => setMenuOpen(!menuOpen)}
-                    className="lg:hidden text-2xl text-gray-800"
-                >
-                    {menuOpen ? <FiX /> : <FiMenu />}
-                </button>
-
-                {/* Logo */}
-                <div className="">
-                    <Link href="/" className="sm:text-lg lg:text-2xl font-semibold tracking-wide">
-                        H.M.Friends & Fashion
-                    </Link>
-                </div>
-
-                {/* Desktop Navigation */}
-                <nav className="hidden lg:flex gap-8 items-center text-sm uppercase">
-                    {navItems.map((item, index) => (
-                        <DropdownItem key={index} item={item} isMobile={false} />
+            {isOpen && (
+                <div className="absolute left-0 top-full z-50 min-w-48 rounded-md border bg-white p-2 shadow-md">
+                    {item.children.map((child, index) => (
+                        <DesktopSubmenu key={index} item={child} pathname={pathname} />
                     ))}
-                </nav>
-
-                {/* Icons */}
-                <div className="flex items-center gap-4 text-xl text-gray-700">
-                    <Link href="/cart"><FaShoppingBag className="cursor-pointer" /></Link>
-                    <FaSearch className="cursor-pointer" />
-                    <Link href=""><FaUser className="hidden sm:inline cursor-pointer" /></Link>
-
                 </div>
-            </div>
-
-            {/* Mobile Navigation */}
-            {menuOpen && (
-                <nav className="lg:hidden mt-2 px-4 space-y-2 pb-4 text-sm text-gray-800">
-                    {navItems.map((item, index) => (
-                        <DropdownItem key={index} item={item} isMobile={true} />
-                    ))}
-                </nav>
             )}
         </div>
-    );
-};
+    )
+}
 
-export default Nav;
+// Recursive desktop submenu
+function DesktopSubmenu({ item, pathname }) {
+    const [isOpen, setIsOpen] = useState(false)
+
+    if (!item.children) {
+        return (
+            <Link
+                href={item.href || "#"}
+                className={`block rounded-sm px-3 py-2 text-sm hover:bg-gray-100 ${pathname === item.href ? "bg-gray-200 font-medium" : ""}`}
+            >
+                {item.title}
+            </Link>
+        )
+    }
+
+    return (
+        <div
+            className="relative"
+            onMouseEnter={() => setIsOpen(true)}
+            onMouseLeave={() => setIsOpen(false)}
+        >
+            <button className="flex w-full items-center justify-between rounded-sm px-3 py-2 text-sm hover:bg-gray-100">
+                {item.title}
+                <ChevronDown className="h-4 w-4" />
+            </button>
+
+            {isOpen && (
+                <div className="absolute left-full top-0 z-50 min-w-48 rounded-md border bg-white p-2 shadow-md">
+                    {item.children.map((child, index) => (
+                        <DesktopSubmenu key={index} item={child} pathname={pathname} />
+                    ))}
+                </div>
+            )}
+        </div>
+    )
+}
+
+// Mobile menu item (recursive)
+function MobileMenuItem({ item, pathname, level = 0, onItemClick }) {
+    const [isExpanded, setIsExpanded] = useState(false)
+    const hasChildren = item.children && item.children.length > 0
+
+    const handleClick = () => {
+        if (hasChildren) {
+            setIsExpanded(!isExpanded)
+        } else if (item.href) {
+            onItemClick()
+        }
+    }
+
+    return (
+        <div>
+            <button
+                onClick={handleClick}
+                className={`flex w-full items-center justify-between px-4 py-3 text-left hover:bg-gray-100 ${pathname === item.href ? "bg-gray-200 font-medium" : ""} ${level > 0 ? "pl-8" : ""}`}
+            >
+                <span>{item.title}</span>
+                {hasChildren && (isExpanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />)}
+            </button>
+
+            {hasChildren && isExpanded && (
+                <div>
+                    {item.children.map((child, index) => (
+                        <MobileMenuItem
+                            key={index}
+                            item={child}
+                            pathname={pathname}
+                            level={level + 1}
+                            onItemClick={onItemClick}
+                        />
+                    ))}
+                </div>
+            )}
+        </div>
+    )
+}
+
+export default function Navbar() {
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+    const pathname = usePathname()
+
+    useEffect(() => {
+        setIsMobileMenuOpen(false)
+    }, [pathname])
+
+    return (
+        <>
+            <nav className="sticky top-0 z-40 w-full border-b bg-white">
+                <div className="container mx-auto px-4">
+                    <div className="flex h-16 items-center justify-between">
+                        {/* Mobile menu button */}
+                        <button
+                            onClick={() => setIsMobileMenuOpen(true)}
+                            className="flex items-center justify-center p-2 md:hidden"
+                            aria-label="Open menu"
+                        >
+                            <Menu className="h-6 w-6" />
+                        </button>
+
+                        {/* Logo */}
+                        <div className="flex-1 md:flex-none">
+                            <Link href="/" className="flex items-center justify-center md:justify-start">
+                                <span className="text-xl font-bold">STORE</span>
+                            </Link>
+                        </div>
+
+                        {/* Desktop navigation */}
+                        <div className="hidden items-center space-x-1 md:flex">
+                            {navItems.map((item, index) => (
+                                <DesktopMenu key={index} item={item} pathname={pathname} />
+                            ))}
+                        </div>
+
+                        {/* Right side icons */}
+                        <div className="flex items-center space-x-2">
+                            <button className="p-2 rounded-md hover:bg-gray-100">
+                                <Search className="h-5 w-5" />
+                            </button>
+                            <button className="hidden p-2 rounded-md hover:bg-gray-100 md:flex">
+                                <User className="h-5 w-5" />
+                            </button>
+                            <button className="p-2 rounded-md hover:bg-gray-100">
+                                <ShoppingBag className="h-5 w-5" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            {/* Mobile menu */}
+            {isMobileMenuOpen && (
+                <div className="fixed inset-0 z-50 bg-white md:hidden">
+                    {/* Mobile menu header */}
+                    <div className="flex h-16 items-center justify-between border-b px-4">
+                        <span className="text-lg font-bold">STORE</span>
+                        <button
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            className="p-2 rounded-md hover:bg-gray-100"
+                            aria-label="Close menu"
+                        >
+                            <X className="h-6 w-6" />
+                        </button>
+                    </div>
+
+                    {/* Mobile menu content */}
+                    <div className="overflow-y-auto">
+                        {navItems.map((item, index) => (
+                            <MobileMenuItem
+                                key={index}
+                                item={item}
+                                pathname={pathname}
+                                onItemClick={() => setIsMobileMenuOpen(false)}
+                            />
+                        ))}
+                    </div>
+                </div>
+            )}
+        </>
+    )
+}
