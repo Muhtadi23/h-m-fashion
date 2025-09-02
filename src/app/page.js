@@ -8,7 +8,7 @@ export default function Home() {
       <Slider />
       <div className="mt-4" >
         <CategoryBanner imageSrc={"/women_sBanner.webp"} />
-        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4'>
+        <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 p-4'>
           <ProductCard image={"/productWoman4.webp"} image2={"/productWoman44.webp"} />
           <ProductCard image={"/productWoman1.webp"} image2={"/productWoman11.webp"} />
           <ProductCard image={"/productWoman2.webp"} image2={"/productWoman22.webp"} />
