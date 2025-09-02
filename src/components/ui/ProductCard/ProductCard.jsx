@@ -38,7 +38,7 @@ const ProductCard = ({ image, image2 }) => {
                 </div>
 
                 {/* Product Info */}
-                <div className="px-6 py-5 text-center relative">
+                <div className="px-2 py-5 text-center relative">
                     {/* Product Name */}
                     <h3 className="text-secondary-gray font-semibold text-base mb-2 leading-tight transition-colors duration-300 group-hover:text-black">
                         Red Bandeau Maxi Dress
