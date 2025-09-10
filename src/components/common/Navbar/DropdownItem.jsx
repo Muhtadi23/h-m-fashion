@@ -1,70 +1,88 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
-import { IoMdArrowDropdown } from 'react-icons/io';
 import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronDown } from 'lucide-react';
 
-const DropdownItem = ({ item, closeParent }) => {
-    const [openSubmenu, setOpenSubmenu] = useState(false);
-    const dropdownRef = useRef(null);
+const DropdownItem = ({ item, mobile = false, isNested = false }) => {
+    const [open, setOpen] = useState(false);
+    const ref = useRef(null);
 
-    const toggleSubmenu = () => setOpenSubmenu((prev) => !prev);
-
-    // Close on outside click
+    // Close on outside click (desktop only)
     useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-                setOpenSubmenu(false);
+        if (mobile) return;
+        const handler = (e) => {
+            if (ref.current && !ref.current.contains(e.target)) {
+                setOpen(false);
             }
         };
-
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => document.removeEventListener('mousedown', handleClickOutside);
-    }, []);
+        document.addEventListener('mousedown', handler);
+        return () => document.removeEventListener('mousedown', handler);
+    }, [mobile]);
 
     if (item.children) {
         return (
-            <div
-                ref={dropdownRef}
-                className="relative"
-            >
+            <div ref={ref} className="relative font-semibold">
                 {/* Trigger */}
                 <div
-                    className="flex items-center justify-between gap-1 cursor-pointer hover:text-black transition-colors"
-                    onClick={toggleSubmenu}
+                    onClick={() => setOpen(!open)}
+                    className={`flex items-center justify-between font-semibold gap-1 cursor-pointer ${mobile
+                            ? 'py-2 font-semibold text-gray-700 hover:text-black'
+                            : 'hover:text-black transition'
+                        }`}
                 >
-                    <span>{item.title}</span>
-                    <IoMdArrowDropdown
-                        className={`transition-transform duration-200 ${openSubmenu ? 'rotate-180' : ''
-                            }`}
-                        size={14}
+                    {item.label || item.title}
+                    <ChevronDown
+                        className={`transition-transform duration-300 font-semibold${open ? 'rotate-180' : ''}`}
+                        size={16}
                     />
                 </div>
 
-                {/* Submenu */}
-                {openSubmenu && (
-                    <div className="absolute mt-2 ml-4 space-y-1 bg-white w-[200px] py-2 px-6 z-30 shadow-lg">
-                        {item.children.map((child, index) => (
-                            <DropdownItem key={index} item={child} closeParent={() => setOpenSubmenu(false)} />
+                {/* Desktop Dropdown */}
+                {!mobile && (
+                    <AnimatePresence>
+                        {open && (
+                            <motion.div
+                                initial={{ opacity: 0, y: isNested ? 0 : 10, x: isNested ? 10 : 0 }}
+                                animate={{ opacity: 1, y: 0, x: 0 }}
+                                exit={{ opacity: 0, y: isNested ? 0 : 10, x: isNested ? 10 : 0 }}
+                                transition={{ duration: 0.2 }}
+                                className={`absolute bg-gray-400 ${isNested
+                                        ? 'left-full top-0 ml-2' // beside parent
+                                        : 'left-0 mt-2' // below parent
+                                    } bg-white shadow-lg py-3 px-4 min-w-[200px] z-40`}
+                            >
+                                {item.children.map((child, idx) => (
+                                    <DropdownItem key={idx} item={child} isNested />
+                                ))}
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                )}
+
+                {/* Mobile Dropdown (collapsible under parent) */}
+                {mobile && open && (
+                    <div className="pl-4 mt-2 border-l border-gray-200 font-semibold space-y-2">
+                        {item.children.map((child, idx) => (
+                            <DropdownItem key={idx} item={child} mobile isNested />
                         ))}
                     </div>
                 )}
             </div>
         );
-    } else {
-        return (
-            <div className="">
-                <Link
-                    href={item.href}
-                    className="block text-sm  hover:text-black hover:font-medium transition-colors"
-                    onClick={() => {
-                        if (closeParent) closeParent(); // Close parent dropdown
-                    }}
-                >
-                    {item.title}
-                </Link>
-            </div>
-        );
     }
+
+    return (
+        <Link
+            href={item.href}
+            className={`block font-semibold ${mobile
+                    ? 'py-2 font-semibold text-gray-600 hover:text-black'
+                    : 'py-1 font-semibold text-gray-600 hover:text-black transition'
+                }`}
+        >
+            {item.label || item.title}
+        </Link>
+    );
 };
 
 export default DropdownItem;
