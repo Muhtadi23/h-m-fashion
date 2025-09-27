@@ -5,7 +5,7 @@ import { Sparkles, ArrowRight } from 'lucide-react';
 
 const CategoryBanner = ({ imageSrc, bannerContent }) => {
     return (
-        <div className="relative h-auto lg:h-[70vh] overflow-hidden bg-white">
+        <div className="relative h-auto lg:h-[70vh] overflow-hidden">
             {/* Responsive padding */}
             <div className="relative z-10 flex items-center justify-center h-full px-4 py-8 sm:px-6 sm:py-12 lg:px-10 lg:py-16">
                 <div className="flex flex-col-reverse lg:flex-row items-center justify-between max-w-7xl mx-auto gap-8 sm:gap-12">
@@ -19,12 +19,12 @@ const CategoryBanner = ({ imageSrc, bannerContent }) => {
                         </div>
 
                         {/* Heading */}
-                        <h1 className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-black leading-tight text-main-gray">
+                        <h1 className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-black leading-tight text-main-gray dark:text-white">
                             {bannerContent}
                         </h1>
 
                         {/* Description */}
-                        <p className="text-base sm:text-lg lg:text-xl text-secondary-gray leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                        <p className="text-base sm:text-lg lg:text-xl text-secondary-gray dark:text-gray-400 leading-relaxed max-w-2xl mx-auto lg:mx-0">
                             Discover our meticulously curated collection designed to elevate your style and inspire your journey.
                         </p>
 

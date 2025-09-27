@@ -23,17 +23,18 @@ const DropdownItem = ({ item, mobile = false, isNested = false }) => {
     if (item.children) {
         return (
             <div ref={ref} className="relative font-semibold">
-                {/* Trigger */}
+                {/* Trigger - underline on hover */}
                 <div
                     onClick={() => setOpen(!open)}
-                    className={`flex items-center justify-between font-semibold gap-1 cursor-pointer ${mobile
-                            ? 'py-2 font-semibold text-gray-700 hover:text-black'
-                            : 'hover:text-black transition'
+                    className={`flex items-center justify-between gap-1 cursor-pointer relative 
+                        ${mobile
+                            ? 'py-2 text-gray-700 hover:text-black'
+                            : 'hover:text-black transition after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-black hover:after:w-full after:transition-all after:duration-300'
                         }`}
                 >
                     {item.label || item.title}
                     <ChevronDown
-                        className={`transition-transform duration-300 font-semibold${open ? 'rotate-180' : ''}`}
+                        className={`transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
                         size={16}
                     />
                 </div>
@@ -47,9 +48,9 @@ const DropdownItem = ({ item, mobile = false, isNested = false }) => {
                                 animate={{ opacity: 1, y: 0, x: 0 }}
                                 exit={{ opacity: 0, y: isNested ? 0 : 10, x: isNested ? 10 : 0 }}
                                 transition={{ duration: 0.2 }}
-                                className={`absolute bg-gray-400 ${isNested
-                                        ? 'left-full top-0 ml-2' // beside parent
-                                        : 'left-0 mt-2' // below parent
+                                className={`absolute ${isNested
+                                    ? 'left-full top-0 ml-2'
+                                    : 'left-0 mt-2'
                                     } bg-white shadow-lg py-3 px-4 min-w-[200px] z-40`}
                             >
                                 {item.children.map((child, idx) => (
@@ -60,9 +61,9 @@ const DropdownItem = ({ item, mobile = false, isNested = false }) => {
                     </AnimatePresence>
                 )}
 
-                {/* Mobile Dropdown (collapsible under parent) */}
+                {/* Mobile Dropdown */}
                 {mobile && open && (
-                    <div className="pl-4 mt-2 border-l border-gray-200 font-semibold space-y-2">
+                    <div className="pl-4 mt-2 border-l border-gray-200 space-y-2">
                         {item.children.map((child, idx) => (
                             <DropdownItem key={idx} item={child} mobile isNested />
                         ))}
@@ -72,12 +73,13 @@ const DropdownItem = ({ item, mobile = false, isNested = false }) => {
         );
     }
 
+    // Normal link with hover underline
     return (
         <Link
             href={item.href}
-            className={`block font-semibold ${mobile
-                    ? 'py-2 font-semibold text-gray-600 hover:text-black'
-                    : 'py-1 font-semibold text-gray-600 hover:text-black transition'
+            className={`block relative ${mobile
+                ? 'py-2 text-gray-600 hover:text-black'
+                : 'py-1 text-gray-600 hover:text-black transition after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-black hover:after:w-full after:transition-all after:duration-300'
                 }`}
         >
             {item.label || item.title}
