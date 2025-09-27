@@ -1,10 +1,17 @@
-import React from 'react';
+import React from "react";
+import Image from "next/image";
 
-const Categories = ({ CategoryName, CategoryImage }) => {
+const Categories = ({ categoryName, categoryImage }) => {
     return (
-        <div>
-            <Image src={CategoryImage} alt="Categories" />
-            <h2>{CategoryName}</h2>
+        <div className="flex flex-col items-center shadow-lg">
+            <Image
+                src={categoryImage}
+                alt={categoryName}
+                width={400}
+                height={200}
+                className="w-full"
+            />
+            <h2 className="mt-2 text-lg font-semibold">{categoryName}</h2>
         </div>
     );
 };

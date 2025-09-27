@@ -1,3 +1,4 @@
+import Categories from "@/components/ui/Categories/Categories";
 import CategoryBanner from "@/components/ui/CategoryBanner/CategoryBanner";
 import ProductCard from "@/components/ui/ProductCard/ProductCard";
 import Slider from "@/components/ui/Slider/Slider";
@@ -6,6 +7,12 @@ export default function Home() {
   return (
     <div>
       <Slider />
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2 p-4">
+        <Categories categoryName="Men" categoryImage="/Men.webp"/>
+        <Categories categoryName="Women" categoryImage="/Woman.webp"/>
+        <Categories categoryName="Kids" categoryImage="/Kidss.webp"/>
+        <Categories categoryName="Weddings" categoryImage="/Weddings.webp"/>
+      </div>
       <div className="mt-4" >
         <CategoryBanner imageSrc={"/women_sBanner-removebg-preview.png"} bannerContent={"Women's Collection"} />
         <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 p-4'>
