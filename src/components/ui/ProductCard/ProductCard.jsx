@@ -6,9 +6,9 @@ import DiscountSaleBadge from '../DiscountSaleBadge/DiscountSaleBadge';
 
 const ProductCard = ({ image, image2 }) => {
     return (
-        <div className="group relative w-full max-w-[320px] sm:max-w-[340px] md:max-w-[360px] lg:max-w-[380px] xl:max-w-[400px] mx-auto">
+        <div className="group relative w-full max-w-[320px] sm:max-w-[340px] md:max-w-[360px] lg:max-w-[380px] xl:max-w-[400px] mx-auto border ">
             {/* Main Card Container */}
-            <div className="relative rounded-3xl overflow-hidden bg-white border border-gray-100 transition-all duration-500 hover:shadow-2xl hover:shadow-black/10 hover:-translate-y-2 hover:border-gray-200">
+            <div className="relative rounded-3xl overflow-hidden  transition-all duration-500 hover:shadow-2xl hover:shadow-black/10 hover:-translate-y-2 hover:border-gray-200">
 
                 {/* Wishlist Button */}
                 <button className="cursor-pointer absolute top-4 right-4 z-10 w-10 h-10 bg-white backdrop-blur-sm rounded-full flex items-center justify-center transition-all duration-300 hover:bg-gray-50 hover:scale-110 hover:shadow-lg opacity-0 group-hover:opacity-100">
@@ -40,7 +40,7 @@ const ProductCard = ({ image, image2 }) => {
                 {/* Product Info */}
                 <div className="px-2 py-5 text-center relative">
                     {/* Product Name */}
-                    <h3 className="text-secondary-gray font-semibold text-base mb-2 leading-tight transition-colors duration-300 group-hover:text-black">
+                    <h3 className="text-secondary-gray dark:text-gray-300 font-semibold text-base mb-2 leading-tight transition-colors duration-300 group-hover:text-black dark:group-hover:text-white">
                         Red Bandeau Maxi Dress
                     </h3>
 
@@ -57,8 +57,8 @@ const ProductCard = ({ image, image2 }) => {
 
                     {/* Price */}
                     <div className="mb-4">
-                        <p className="text-gray-900 text-xl font-bold">£9.00</p>
-                        <p className="text-gray-400 text-sm line-through">£15.00</p>
+                        <p className="text-gray-900 dark:text-white text-xl font-bold">£9.00</p>
+                        <p className="text-gray-400 dark:text-gray-500 text-sm line-through">£15.00</p>
                     </div>
 
                     {/* Add to Cart Button */}

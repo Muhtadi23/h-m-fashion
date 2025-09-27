@@ -23,7 +23,7 @@ const AddToCartButton = () => {
                     group-hover/btn:scale-110
                 "
             />
-            <span className="text-xs sm:text-sm md:text-base lg:text-lg whitespace-nowrap">
+            <span className="text-white text-xs sm:text-sm md:text-base lg:text-lg whitespace-nowrap">
                 Add to Cart
             </span>
         </button>

@@ -88,7 +88,8 @@ export default function Navbar() {
                 {/* Icons */}
                 <div className="flex items-center gap-5 text-lg text-gray-700">
                     <Search className="hidden sm:inline cursor-pointer hover:text-black transition" />
-                    <ShoppingBag  className="cursor-pointer hover:text-black transition" />
+                    <Link href="/cart"> <ShoppingBag className="cursor-pointer hover:text-black transition" /></Link>
+
                 </div>
             </div>
 
