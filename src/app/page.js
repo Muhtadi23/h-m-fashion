@@ -7,7 +7,7 @@ export default function Home() {
     <div>
       <Slider />
       <div className="mt-4" >
-        <CategoryBanner imageSrc={"/women_sBanner.webp"} />
+        <CategoryBanner imageSrc={"/women_sBanner-removebg-preview.png"} bannerContent={"Women's Collection"} />
         <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 p-4'>
           <ProductCard image={"/productWoman4.webp"} image2={"/productWoman44.webp"} />
           <ProductCard image={"/productWoman1.webp"} image2={"/productWoman11.webp"} />
@@ -24,7 +24,7 @@ export default function Home() {
         </div>
       </div>
       <div className="mt-4" >
-        <CategoryBanner imageSrc={"/kids.webp"} />
+        <CategoryBanner bannerContent={"Kid's Collection"} imageSrc={"/kids.jpg"} />
         <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 p-4'>
           <ProductCard image={"/kids1.webp"} />
           <ProductCard image={"/kids2.webp"} />
